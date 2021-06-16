@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    Login</title>
+    <link rel="icon" type="image/x-icon" href="image/logomain.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <script type="text/javascript">
+            function Login(){
+            var xhr = new XMLHttpRequest();
+            var url = "http://localhost:8005/login/signin";
+            var username = document.getElementById("Uname").value
+            var password = document.getElementById("Pass").value
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    console.log(json);
+                    if(json["status"]==true){
+                        alert("Signup sucessfully");
+                        window.loction.reload();
+                    }
+                    else{
+                        alert(json["statusText"]);
+                        window.loction.reload();
+                    }
+                }
+            };
+            var data = JSON.stringify({"username": username ,"password": password});
+            xhr.send(data);
+        }
+    </script>   
+   
+</head>
+<body>
+    <style type="text/css">
+        h1{
+            font-size: 50px;
+            color: white;
+            padding-left: 0px;
+            padding: 40px;
+            margin-top: 0px;
+            color: white;
+            margin-bottom: 15px;
+            padding-top: 20px;
+            font-family: 'Roboto Condensed', sans-serif;
+
+        }
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background-image:url(image/3.jpg) ;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            
+        }
+        .login{
+            width: 350px;
+            overflow: hidden;
+            margin: auto;
+            margin: 20 0 0 450px;
+            padding: 80px;
+            background: inherit;
+            border-radius: 15px ;
+        }
+        h1{
+            text-align: center;
+            color: inherit;
+            padding: 20px;
+            
+        }
+        label{
+            color: darkred;
+            font-size: 20px;
+            text-align: right;
+        }
+        #Uname{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+        }
+        #Pass{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+        }
+        #log{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 17px;
+            padding-left: 7px;
+            color: black;
+            background-color: indianred;
+        }  
+        span{
+            color: white;
+            font-size: 17px;
+        }
+        .butt:hover{
+            background-color: transparent;
+        }
+        #image1{
+            width: 200px;
+            height: 150px;
+            position:absolute;
+            left: 10px;
+            top: 10px;
+            float: left;
+            background: inherit;
+        }
+        .head1{
+            font-size: 50px;
+            text-align: center;
+            color: darkred;
+        }
+    </style>
+    <h1></h1><br>
+    <div class="login">
+    <form id="login" method="get">
+        <h2 class="head1">Login</h2>
+        <label><b>Username
+        </b>
+        </label>
+        <input type="text" name="Uname" id="Uname" placeholder="Username">
+        <br><br>
+        <label><b>Password
+        </b>
+        </label>
+        </br>
+        <input type="Password" name="Pass" id="Pass" placeholder="Password"> </form>
+        <br><br>
+        <input class="butt" type="button" name="log" id="log" value="Log In" onclick="Login()">
+        <br><br>
+        <input  type="checkbox" id="check">
+        <span>Remember me</span>
+        <br><br>
+        
+    </form>
+</div>
+<img src="image/logomain.png" id="image1">
+</body>
+</html>
