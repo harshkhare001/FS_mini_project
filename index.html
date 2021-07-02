@@ -6,9 +6,21 @@
     <link rel="icon" type="image/x-icon" href="image/logomain.png">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
         <script type="text/javascript">
+            
+            function verify(){
+                
+                if (prompt("enter your code")=="1234") {
+                    alert("Admin verified");
+                    location.href="Signup.html";
+                }
+                else{
+                    alert("invalid code");
+                    window.location.reload();
+                }
+            }
             function Login(){
             var xhr = new XMLHttpRequest();
-            var url = "http://localhost:8005/login/signin";
+            var url = "http://localhost:8005/index/signin";
             var username = document.getElementById("Uname").value
             var password = document.getElementById("Pass").value
             xhr.open("POST", url, true);
@@ -18,8 +30,8 @@
                     var json = JSON.parse(xhr.responseText);
                     console.log(json);
                     if(json["status"]==true){
-                        alert("Signup sucessfully");
-                        window.loction.reload();
+                        alert(json["statusText"]);
+                        window.loction.href="dashboard.html";
                     }
                     else{
                         alert(json["statusText"]);
@@ -60,7 +72,7 @@
         .login{
             width: 350px;
             overflow: hidden;
-            margin: auto;
+            margin: auto;                
             margin: 20 0 0 450px;
             padding: 80px;
             background: inherit;
@@ -121,6 +133,16 @@
             text-align: center;
             color: darkred;
         }
+        .Signbutt{
+            height: 30px;
+            border: none;
+            border-radius: 17px;
+            padding-left: 7px;
+            color: black;
+        }
+        .signuptext{
+            color: white;
+        }
     </style>
     <h1></h1><br>
     <div class="login">
@@ -141,6 +163,8 @@
         <br><br>
         <input  type="checkbox" id="check">
         <span>Remember me</span>
+        <br><br>
+        <label class="signuptext">New admin register? &nbsp &nbsp  <input class="Signbutt" type="button" name="sign" value="Sign up" onclick="verify()"></label>
         <br><br>
         
     </form>
