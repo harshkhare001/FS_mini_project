@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    Railway Employee List
+    </title>
+    <link rel="stylesheet" type="text/css" href="styleindex.css">
+    <link rel="icon" type="image/x-icon" href="image/logomain.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src=""></script>
+    <script >
+        $(document).ready(function(){
+            $.getJSON("http://localhost:8005/index/viewemployee",function(data){
+                var employeedata='';
+                $.each(data,function(key,value) {
+                employeedata += '<tr>';
+                employeedata +='<td>'+value.Eid+'</td>';
+                employeedata +='<td>'+value.Name+'</td>';
+                employeedata +='<td>'+value.Des+'</td>';
+                employeedata +='<td>'+value.Phone+'</td>';
+                employeedata +='<td>'+value.Pass+'</td>';
+                employeedata +='<td>'+value.Pto+'</td>';
+                employeedata += '</tr>';
+              });
+              $('table').append(employeedata);   
+           });   
+       });
+   </script>
+</head>
+<body>
+    <style type="text/css">
+        td{
+            color: black;
+        }
+        h1{
+            font-size: 35px;
+            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+            color: white;
+            padding-left: 0px;
+            background-color:  #191970;
+            padding: 40px;
+            margin: 0px;
+            color: white;
+        }
+        body{
+            background-color: #F5F5F5;
+        }
+        #tb{border-radius: 0.25em; min-width: 1em; outline: 0;}
+        span[contenteditable] { display: inline-block;color: black; }
+        table { font-size: 75%; table-layout: fixed; width: 100%; }
+        table { border-collapse: separate; border-spacing: 2px; }
+        th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left;}
+        th, td { border-radius: 0.25em; border-style: solid; }
+        th { background:  #191970; border-color: black; color: white;}
+        td { border-color: black; }
+        table.meta, table.balance { float: right; width: 36%; }
+        table.meta:after, table.balance:after { clear: both; content: ""; display: table; color: black;}
+        /* table meta */
+        table.meta th { width: 40%; }
+        table.meta td { width: 60%; }
+        /* table items */
+        table.inventory { clear: both; width: 100%; }
+        table.inventory th { font-weight: bold; text-align: center;}
+        table.inventory td:nth-child(1) { width: 26%; }
+        table.inventory td:nth-child(2) { width: 38%; }
+        table.inventory td:nth-child(3) {  width: 12%; }
+        table.inventory td:nth-child(4) {  width: 12%; }
+        table.inventory td:nth-child(5) {  width: 12%; }
+        table.inventory td:nth-child(6) {  width: 12%; }
+        /* table balance */
+        table.balance th, table.balance td { width: 50%; }
+        table.balance td { text-align: right;}
+        .inventory{
+            padding-top: 15px;
+        }
+        #log{
+            color: white;
+            background-color:#23463f;
+            float: right;
+            padding-right: 15px;
+            margin: 15px;
+        }
+    </style>
+     <h1>Railway Employee List</h1>
+     <span>
+        <table class="inventory" id="table">
+            <thead>
+                <tr>
+                    <th><span >Employee ID</span></th>
+                    <th><span >Name</span></th>
+                    <th><span >Designation</span></th>
+                    <th><span >Phone Number</span></th>
+                    <th><span >Passes Left</span></th>
+                    <th><span >PTO's Left</span></th>
+                </tr>
+            </thead>
+        </table>
+        <br><br>
+        <br><br>
+        <br><br>
+    </span>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    ADD Employee
+    </title>
+    <link rel="stylesheet" type="text/css" href="styleindex.css">
+    <link rel="icon" type="image/x-icon" href="image/logomain.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <script >
+        function ADDEmployee(){
+        var xhr = new XMLHttpRequest();
+        var url = "http://localhost:8005/index/addemployee";
+        var employeeid = document.getElementById("Uname").value
+        var name = document.getElementById("Cname").value
+        var designation = document.getElementById("GSTNO").value
+        var phone = document.getElementById("num").value
+        xhr.open("POST", url, true);
+        //xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json);
+                if(json["status"]==true){
+                    alert(json["statusText"]);
+                    //window.loction.reload();
+                }
+                else{
+                    alert(json["statusText"]);
+                    //window.loction.reload();
+                }
+            }
+        };
+        var data = JSON.stringify({"Eid": employeeid ,"Name": name,"Des": designation,"Phone":phone});
+        xhr.send(data);
+    }
+    </script>  
+</head>
+<body>
+        <style type="text/css">
+                h1{
+                    font-size: 35px;
+                    /*font-family: 'Monoton', cursive;*/
+                    text-align: center;
+                    color: white;
+                    padding-left: 0px;
+                    background-color: #191970;
+                    padding: 40px;
+                    margin: 0px;
+                    color: white;
+                }
+               body{               
+                     background-color:#FFFFFF;
+                    }
+               .login{
+                    margin-top: 35px;
+ 
+                }
+                #image1{
+                    width: 200px;
+                    height: 150px;
+                    position:absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    float: left;
+                    background: inherit;
+                }
+                #bbutt{
+                    float: right;
+                    border-radius: 10px;
+                    border-color: blueviolet;
+                    background-color: white;
+                    font-size: 20px;
+                    text-decoration: none;
+
+                }
+                #image1{
+                    width: 100px;
+                    height: 100px;
+                    position:absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    float: left;
+                    background: inherit;
+                }
+              </style>
+              <h1>ADD Employee 
+                <a type="button" name="back" id="bbutt" href="dashboard.html">Back</a>
+              </h1>
+              <div class="login">
+    <form id="login" method="get" >
+        <label><b>Employee ID
+        </b>
+        </label>
+       <input type="text" name="Uname" id="Uname" placeholder="Employee ID">
+        <br><br>
+        <label><b>Name
+        </b>
+        </label>
+        <br> <input type="text" name="Uname" id="Cname" placeholder="Name">
+        <br><br>
+        <label><b>Designation
+        </b>
+        </label>
+        </br>
+        <input type="text" name="gst" id="GSTNO" placeholder="Designation"> </form>
+        <br>
+        <label><b>Phone Number
+        </b>
+        </label>
+        <input type="tel" name="num" id="num" placeholder="Phone Numer">
+        <br><br>
+        <br><br>
+        <input class="butt" type="button" name="log" id="log" value="Submit" onclick="ADDEmployee()">
+        <br><br>
+    </form>
+</div>
+<img src="image/logomain.png" id="image1">
+</body>
+</html>

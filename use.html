@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>use pto/pass</title>
+<link rel="icon" type="image/x-icon" href="image/logomain.png">
+<link rel="stylesheet" type="text/css" href="">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<script type="text/javascript">
+var eid ;
+var n = 0;
+function rel(){
+window.location.reload();
+}
+function search(){
+        var xhr = new XMLHttpRequest();
+        var url = "http://localhost:8005/index/searchemployee";
+        eid = document.getElementById("eid").value;
+        xhr.open("POST", url, true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json);
+                console.log(n);
+                if(json["status"]==true){
+                    //alert(json["statusText"]);
+                    $(document).ready(function(){
+var employeedata='';
+document.getElementById("t").innerHTML = ("");
+removeRow();
+n=n+1;
+employeedata += '<tr id = "row1">';
+employeedata +='<td>'+json["Eid"]+'</td>';
+employeedata +='<td>'+json["Name"]+'</td>';
+employeedata +='<td>'+json["Des"]+'</td>';
+employeedata +='<td>'+json["Phone"]+'</td>';
+employeedata +='<td>'+json["Pass"]+'</td>';
+employeedata +='<td>'+json["Pto"]+'</td>';
+employeedata += '</tr>'; 
+$('table').append(employeedata);
+}); 
+                }
+                else{
+                removeRow();
+                    //alert(json["statusText"]);
+                   document.getElementById("t").innerHTML = ("Employee Not Found");
+
+                }
+            }
+        };
+        var data = JSON.stringify({"Eid":eid});
+        console.log(data);
+        xhr.send(data);
+    }
+    function usepass(){
+    var xhr = new XMLHttpRequest();
+        var url = "http://localhost:8005/index/usepass";
+        eid = document.getElementById("eid").value;
+        xhr.open("POST", url, true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json);
+                if(json["status"]==true){
+                    alert(json["statusText"]);
+                }
+                else{
+                    alert(json["statusText"]);
+                }
+            }
+        };
+        var data = JSON.stringify({"Eid":eid});
+        console.log(data);
+        xhr.send(data);
+    }
+    function usepto(){
+    var xhr = new XMLHttpRequest();
+        var url = "http://localhost:8005/index/usepto";
+        eid = document.getElementById("eid").value;
+        xhr.open("POST", url, true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json);
+                if(json["status"]==true){
+                    alert(json["statusText"]);
+                }
+                else{
+                    alert(json["statusText"]);
+                }
+            }
+        };
+        var data = JSON.stringify({"Eid":eid});
+        console.log(data);
+        xhr.send(data);
+    }
+  function removeRow() {
+  if(n>0){
+        document.getElementById("table").deleteRow(1);
+        n=n-1;
+    }
+    }
+</script>
+</head>
+<style type="text/css">
+h1{
+text-align: center;
+background-color: #191970;
+color: white;
+margin: -10px;
+padding: 20px;
+font-size: 60px;
+}
+.butt{
+        height: 30px;
+        border: none;
+        border-radius: 17px;
+        padding-left: 7px;
+        color: white;
+        background-color: #191970;
+}
+#t{
+float: center;
+text-align: center;
+font-size: 20px;
+font-style: oblique;
+}
+#eid{
+font-size: 15px; 
+        table-layout: fixed;
+        width: 260px;
+        height:30px;
+        background-color:white;
+        color:black;
+        margin:0px;
+        text-align: center;
+        border-radius: 20px;
+}
+#log,#log1{
+font-size: 15px; 
+        table-layout: fixed;
+        width: 200px;
+        height:30px;
+        background-color:#191970;
+        color:white;
+        margin:20px;
+        text-align: center;
+        border-radius: 20px;
+}
+#s1{
+font-size: 20px;
+padding: 20px;
+}
+#tb{border-radius: 0.25em; min-width: 1em; outline: 0;}
+span[contenteditable] { display: inline-block;color: black; }
+table { font-size: 100%; table-layout: fixed; width: 100%; }
+table { border-collapse: separate; border-spacing: 2px; }
+th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left;}
+th, td { border-radius: 0.25em; border-style: solid; }
+th { background:  #191970; border-color: black; color: white;}
+td { border-color: black; }
+table.meta, table.balance { float: right; width: 36%; }
+table.meta:after, table.balance:after { clear: both; content: ""; display: table; color: black;}
+table.meta th { width: 40%; }
+table.meta td { width: 60%; }
+table.inventory { clear: both; width: 100%; }
+table.inventory th { font-weight: bold; text-align: center;}
+table.inventory td:nth-child(1) { width: 26%; }
+table.inventory td:nth-child(2) { width: 38%; }
+table.inventory td:nth-child(3) {  width: 12%; }
+table.inventory td:nth-child(4) {  width: 12%; }
+table.inventory td:nth-child(5) {  width: 12%; }
+table.inventory td:nth-child(6) {  width: 12%; }
+/* table balance */
+table.balance th, table.balance td { width: 50%;  }
+table.balance td { text-align: right;}
+.inventory{
+   padding-top: 15px;
+}
+#image1{
+                    width: 100px;
+                    height: 100px;
+                    position:absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    float: left;
+                    background: inherit;
+                }
+                #bbutt{
+                    float: right;
+                    border-radius: 10px;
+                    border-color: blueviolet;
+                    background-color: white;
+                    font-size: 20px;
+                    text-decoration: none;
+                    padding: 5px;
+
+                }
+</style>
+<body>
+<h1>Use Pass / PTO 
+    <a type="button" name="back" id="bbutt" href="dashboard.html">Back</a>
+</h1>
+<div class="usage">
+<span id="s1">
+<h3>Enter the Employee ID : <input type="text" name="eid" id="eid"> 
+
+<input type="button" class="butt" name="sbutt" value="search" onclick="search()">
+</h3>
+</span>
+<br><br><br>
+</div>
+<div>
+<span>
+<table class="inventory" id="table">
+<thead>
+<tr>
+<th><span >Employee ID</span></th>
+<th><span >Name</span></th>
+<th><span >Designation</span></th>
+<th><span >Phone Number</span></th>
+<th><span >Passes Left</span></th>
+<th><span >PTO's Left</span></th>
+</tr>
+</thead>
+</table>
+<br><br>
+<p id="t"></p>
+<br><br>
+
+<input class="butt" type="button" name="log" id="log1" value="Use Pass" onclick="usepass()">
+        
+        <input class="butt" type="button" name="log" id="log" value="Use PTO" onclick="usepto()">&nbsp;&nbsp;
+
+
+        <br><br>
+<br><br>
+</span>
+</div>
+ <img src="image/logomain.png" id="image1">
+</body>
+</html>
